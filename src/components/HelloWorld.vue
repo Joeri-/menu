@@ -1,11 +1,11 @@
 <template>
   <div class="hello">
     <h3>Users</h3>
-    <ul v-for="user in users">
+    <ul v-for="user in users()">
         <li>{{user.username}}</li>
     </ul>
     <input type="text" name="" id="" v-model="buttonText">
-    <sui-button @click="onClick()">{{buttonText}}</sui-button>
+    <sui-button v-on:click="onClick()">{{buttonText}}</sui-button>
   </div>
 </template>
 
@@ -15,23 +15,16 @@ import { User } from '../models/User';
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
-  users: User[];
   buttonText: string;
 
   constructor() {
       super();
       this.buttonText = 'Click me';
-      this.users = [
-          {
-              username: 'Joeri',
-              password: '0000'
-          },
-          {
-              username: 'Dorien',
-              password: '0000'
-          }
-      ]
+      this.$store.dispatch('getUsers');
+  }
+
+  users(): User[] {
+      return this.$store.state.users;
   }
 
   onClick(): void{
