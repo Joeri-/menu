@@ -11,14 +11,30 @@ const users = [
     }
 ];
 
+const departments = [
+    {
+        name: 'dep1',
+        managingUsers: ['Joeri']
+    },
+    {
+        name: 'dep2',
+        managingUsers: ['Joeri', 'Dorien']
+    }
+];
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
-app.use('/users', (req, res) => {
+app.get('/users', (req, res) => {
     res.send(users);
+    res.end();
+});
+
+app.get('/departments', (req, res) => {
+    res.send(departments);
     res.end();
 });
 
