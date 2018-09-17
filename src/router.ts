@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Departments from './components/Departments.vue';
+import Users from './components/Users.vue';
 
 Vue.use(Router);
 
@@ -10,6 +12,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users,
+    },
+    {
+      path: '/departments',
+      name: 'departments',
+      component: Departments,
     },
     {
       path: '/about',
