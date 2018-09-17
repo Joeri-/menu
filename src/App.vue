@@ -6,7 +6,9 @@
       <router-link to="/departments">Departments</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <div class="ui container">
+      <router-view/>
+    </div>
   </div>
 </template>
 

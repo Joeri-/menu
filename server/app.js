@@ -4,9 +4,11 @@ const app = new express();
 const PORT = 3000;
 const users = [
     {
+        id: 1,
         username: 'Joeri'
     },
     {
+        id: 2,
         username: 'Dorien'
     }
 ];

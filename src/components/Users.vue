@@ -5,13 +5,15 @@
     <table class="ui table celled selectable">
       <thead>
         <tr>
-          <th>Users</th>
+          <th>Id</th>
+          <th>Username</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in users()"
             :key="user.username"
-            v-on:click="deleteUser(user)">
+            v-on:click="routeToUser(user)">
+            <td>{{user.id}}</td>
             <td>{{user.username}}</td>
         </tr>
       </tbody>
@@ -37,9 +39,13 @@ export default class Users extends Vue {
     return this.$store.state.users;
   }
 
-  deleteUser(user: User) {
-      this.$store.dispatch('deleteUser', user);
+  routeToUser(user: User) {
+      this.$router.push(`/users/${user.id}`);
   }
+
+  // deleteUser(user: User) {
+  //     this.$store.dispatch('deleteUser', user);
+  // }
 }
 </script>
 

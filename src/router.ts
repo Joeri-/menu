@@ -3,10 +3,11 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Departments from './components/Departments.vue';
 import Users from './components/Users.vue';
+import UserDetail from './components/UserDetail.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -17,6 +18,14 @@ export default new Router({
       path: '/users',
       name: 'users',
       component: Users,
+    },
+    {
+      path: '/users/:id',
+      name: 'userDetail',
+      component: UserDetail,
+      meta: {
+        isAuthenticated: false
+      }
     },
     {
       path: '/departments',
@@ -33,3 +42,14 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.isAuthenticated) {
+        next('/');
+    }
+    else {
+        next();
+    }
+});
+
+export default router;
