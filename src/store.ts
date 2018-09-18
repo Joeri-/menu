@@ -12,27 +12,29 @@ export default new Vuex.Store<RootState>({
     departments: [],
   },
   mutations: {
-    setUsers: (state: RootState, users: User[]) => state.users = users,
-    setDepartments: (state: RootState, deps: Department[]) => state.departments = deps,
-    deleteDepartment: (state: RootState, dep: Department) => state.departments = state.departments.filter(department => department.name !== dep.name),
-    deleteUser: (state: RootState, user: User) => state.users = state.users.filter(usr => usr.username !== user.username),
+    setUsers: (state: RootState, users: User[]) => { state.users = users; },
+    setDepartments: (state: RootState, deps: Department[]) => { state.departments = deps; },
+    deleteDepartment: (state: RootState, dep: Department) => {
+      state.departments = state.departments.filter(department => department.name !== dep.name);
+    },
+    deleteUser: (state: RootState, user: User) => {
+      state.users = state.users.filter(usr => usr.username !== user.username);
+    },
   },
   actions: {
     getUsers: (context) => {
       axios
         .get('http://localhost:3000/users')
-        .then(res => context.commit('setUsers', res.data));
+        .then(res => context.commit('setUsers', res.data))
+        .catch(err => console.log(err));
     },
-    deleteUser: (context, user: User) => {
-      context.commit('deleteUser', user);
-    },
+    deleteUser: (context, user: User) => context.commit('deleteUser', user),
     getDepartments: (context) => {
       axios
         .get('http://localhost:3000/departments')
-        .then(res => context.commit('setDepartments', res.data));
+        .then(res => context.commit('setDepartments', res.data))
+        .catch(err => console.log(err));
     },
-    deleteDepartment: (context, department: Department) => {
-      context.commit('deleteDepartment', department);
-    },
+    deleteDepartment: (context, department: Department) => context.commit('deleteDepartment', department),
   },
 });

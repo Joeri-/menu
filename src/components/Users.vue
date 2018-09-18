@@ -1,7 +1,6 @@
 <template>
   <div class="ui segment">
     <h3>Users</h3>
-        <a href="#/departments">Deps</a>
     <table class="ui table celled selectable">
       <thead>
         <tr>
@@ -40,7 +39,7 @@ export default class Users extends Vue {
   }
 
   routeToUser(user: User) {
-      this.$router.push(`/users/${user.id}`);
+    this.$router.push(`/users/${user.id}`);
   }
 
   // deleteUser(user: User) {
