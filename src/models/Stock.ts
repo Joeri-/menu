@@ -1,5 +1,5 @@
 export interface Stock {
-    ISIN: string,
-    dateFrom: Date,
-    dateTo: Date,
+  ISIN: string,
+  dateFrom: Date,
+  dateTo: Date,
 }

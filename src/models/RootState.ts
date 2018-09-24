@@ -1,7 +1,9 @@
-import { User } from '@/models/User';
-import { Department } from '@/models/Department';
+import { Product } from '@/models/Product';
+import { Recipe } from '@/models/Recipe';
+import { Shop } from '@/models/Shop';
 
 export interface RootState {
-    users: User[];
-    departments: Department[];
+  products: Product[];
+  recipes: Recipe[];
+  shops: Shop[];
 }

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:3.4
+    container_name: menu-mongo
+    hostname: menu-mongo
+    environment:
+      - MONGODB_ADMIN_USER=admin
+      - MONGODB_ADMIN_PASS=password
+      - MONGODB_APPLICATION_DATABASE=menu
+      - MONGODB_APPLICATION_USER=user
+      - MONGODB_APPLICATION_PASS=userpassword
+    ports:
+      - "27017:27017"
+
+  api-server:
+    image: menu-api:latest
+    container_name: menu-api
+    hostname: menu-api
+    environment:
+      - PORT=3001
+      - MONGO_HOST=menu-mongo
+      - MONGO_PORT=27017
+      - MONGO_TABLE=menu
+    ports:
+      - "3001:3001"
+    restart: always

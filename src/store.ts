@@ -2,39 +2,59 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import { RootState } from '@/models/RootState';
-import { User } from '@/models/User';
-import { Department } from '@/models/Department';
+import { Product } from '@/models/Product';
+import { Recipe } from '@/models/Recipe';
+import { Shop } from '@/models/Shop';
 
 Vue.use(Vuex);
 export default new Vuex.Store<RootState>({
   state: {
-    users: [],
-    departments: [],
+    products: [],
+    recipes: [],
+    shops: [],
   },
   mutations: {
-    setUsers: (state: RootState, users: User[]) => { state.users = users; },
-    setDepartments: (state: RootState, deps: Department[]) => { state.departments = deps; },
-    deleteDepartment: (state: RootState, dep: Department) => {
-      state.departments = state.departments.filter(department => department.name !== dep.name);
+    // Products
+    setProducts: (state: RootState, products: Product[]) => { state.products = products; },
+    deleteProduct: (state: RootState, product: Product) => {
+      state.products = state.products.filter(prod => prod._id !== product._id);
     },
-    deleteUser: (state: RootState, user: User) => {
-      state.users = state.users.filter(usr => usr.username !== user.username);
+    // Recipes
+    setRecipes: (state: RootState, recipes: Recipe[]) => { state.recipes = recipes; },
+    deleteRecipe: (state: RootState, rec: Recipe) => {
+      state.recipes = state.recipes.filter(recipe => recipe._id !== rec._id);
     },
+    // Shops
+    setShops: (state: RootState, shops: Shop[]) => { state.shops = shops; },
+    deleteShop: (state: RootState, shop: Shop) => {
+      state.shops = state.shops.filter(shp => shp._id !== shop._id);
+    },
+
   },
   actions: {
-    getUsers: (context) => {
+    // Products
+    getProducts: (context) => {
       axios
-        .get('http://localhost:3000/users')
-        .then(res => context.commit('setUsers', res.data))
+        .get('http://localhost:3001/products')
+        .then(res => context.commit('setProducts', res.data))
         .catch(err => console.log(err));
     },
-    deleteUser: (context, user: User) => context.commit('deleteUser', user),
-    getDepartments: (context) => {
+    deleteProduct: (context, product: Product) => context.commit('deleteProduct', product),
+    // Recipes
+    getRecipes: (context) => {
       axios
-        .get('http://localhost:3000/departments')
-        .then(res => context.commit('setDepartments', res.data))
+        .get('http://localhost:3001/recipes')
+        .then(res => context.commit('setRecipes', res.data))
         .catch(err => console.log(err));
     },
-    deleteDepartment: (context, department: Department) => context.commit('deleteDepartment', department),
+    deleteRecipe: (context, recipe: Recipe) => context.commit('deleteRecipe', recipe),
+    // Shops
+    getShops: (context) => {
+      axios
+        .get('http://localhost:3001/shops')
+        .then(res => context.commit('setShops', res.data))
+        .catch(err => console.log(err));
+    },
+    deleteShop: (context, shop: Shop) => context.commit('deleteShop', shop),
   },
 });
